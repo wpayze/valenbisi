@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import {
   Text,
   View,
@@ -7,7 +7,16 @@ import {
   StyleSheet,
 } from "react-native";
 
-const Login = ({ setUsuario }) => {
+import { AppContext } from '../../context/AppContext';
+
+const Login = () => {
+  
+  const { setState } = useContext(AppContext);
+
+  const handleLogin = () => {
+    setState(prev => ({ ...prev, isLoggedIn: true }));
+  };
+
   return (
     <View>
       <View style={styles.formGroup}>
@@ -22,7 +31,7 @@ const Login = ({ setUsuario }) => {
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => setUsuario({ user: "Prueba" })}
+        onPress={() => handleLogin() }
       >
         <Text style={styles.text}>Iniciar Sesi&oacute;n</Text>
       </TouchableOpacity>

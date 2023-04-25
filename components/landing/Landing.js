@@ -1,31 +1,54 @@
 import React from "react";
-import { Text, View, Image } from 'react-native';
-import { TouchableOpacity } from "react-native-web";
-import { StyleSheet } from "react-native-web";
+import {
+  Text,
+  View,
+  ImageBackground,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
 
-const Landing = ({navigation}) => {
+const Landing = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.button} onPress={()=>navigation.navigate("Login")}>
-        <Text style={styles.text}>Comenzar</Text>
-      </TouchableOpacity>
+      <ImageBackground
+        source={require("../../assets/landing.jpg")}
+        resizeMode="cover"
+        style={styles.image}
+      >
+        <Image source={require('../../assets/logo.png')} style={styles.logo} />
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("Login")}
+        >
+          <Text style={styles.text}>Comenzar</Text>
+        </TouchableOpacity>
+      </ImageBackground>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#e6faff",
-    height: "100%"
+    flex: 1
+  },
+  image: {
+    flex: 1,
+    padding: 16,
   },
   button: {
-    alignItems: 'center',
-    backgroundColor: '#262659',
+    alignItems: "center",
+    backgroundColor: "#262659",
     padding: 10,
-    margin: 20
+    borderRadius: 32,
   },
   text: {
-    color: "#fff"
+    color: "#fff",
+  },
+  logo: {
+    width: "100%",
+    resizeMode: 'stretch',
+    height: 100
   }
 });
 
