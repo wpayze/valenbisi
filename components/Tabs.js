@@ -5,7 +5,6 @@ import NotLoggedStack from "./navigations/NotLoggedStack";
 import { AppContext } from '../context/AppContext';
 
 const Tabs = () => {
-  const usuario = true;
   const { state } = useContext(AppContext);
   const isLoggedIn = state.isLoggedIn;
 

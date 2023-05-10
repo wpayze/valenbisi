@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Text,
   View,
@@ -7,8 +6,22 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
+import AuthService from "../../services/AuthService";
+import { useEffect, useContext } from "react";
+import { AppContext } from "../../context/AppContext";
 
 const Landing = ({ navigation }) => {
+  const { setState } = useContext(AppContext);
+  
+  useEffect(() => {
+    const checkLoggedIn = async () => {
+      const isLoggedIn = await AuthService.isLoggedIn();
+
+      if (isLoggedIn) setState((prev) => ({ ...prev, isLoggedIn: true }));
+    };
+    checkLoggedIn();
+  }, []);
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -16,7 +29,7 @@ const Landing = ({ navigation }) => {
         resizeMode="cover"
         style={styles.image}
       >
-        <Image source={require('../../assets/logo.png')} style={styles.logo} />
+        <Image source={require("../../assets/logo.png")} style={styles.logo} />
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate("Login")}
@@ -30,11 +43,12 @@ const Landing = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   image: {
     flex: 1,
     padding: 16,
+    justifyContent: "center",
   },
   button: {
     alignItems: "center",
@@ -47,9 +61,9 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: "100%",
-    resizeMode: 'stretch',
-    height: 100
-  }
+    resizeMode: "stretch",
+    height: 100,
+  },
 });
 
 export default Landing;
