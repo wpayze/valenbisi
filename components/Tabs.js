@@ -1,22 +1,14 @@
-import React, { useContext } from 'react';
-import LoggedInTab from "./navigations/LoggedInTab";
-import NotLoggedStack from "./navigations/NotLoggedStack";
+import React, { useContext } from 'react'
+import LoggedInTab from './navigations/LoggedInTab'
+import NotLoggedStack from './navigations/NotLoggedStack'
 
-import { AppContext } from '../context/AppContext';
+import { AppContext } from '../context/AppContext'
 
 const Tabs = () => {
-  const { state } = useContext(AppContext);
-  const isLoggedIn = state.isLoggedIn;
+  const { state } = useContext(AppContext)
+  const isLoggedIn = state.isLoggedIn
 
-  return (
-    <>
-      {isLoggedIn ? (
-        <LoggedInTab />
-      ) : (
-        <NotLoggedStack />
-      )}
-    </>
-  );
-};
+  return <>{isLoggedIn ? <LoggedInTab /> : <NotLoggedStack />}</>
+}
 
-export default Tabs;
+export default Tabs

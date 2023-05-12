@@ -1,58 +1,66 @@
-import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import React from 'react'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
-import Home from "../home/Home";
-import Favorites from "../favorites/Favorites";
-import Stops from "../stops/Stops";
-import Settings from "../settings/Settings";
+import Home from '../home/Home'
+import CloseStops from '../closeStops/CloseStops'
+import Favorites from '../favorites/Favorites'
+import Stops from '../stops/Stops'
+import Settings from '../settings/Settings'
 
-import { Entypo, AntDesign } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
+import { Entypo, AntDesign, Ionicons, FontAwesome } from '@expo/vector-icons'
 
 const LoggedInTab = () => {
-  const Tab = createBottomTabNavigator();
+  const Tab = createBottomTabNavigator()
 
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Home"
+        name='Inicio'
         component={Home}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Entypo name="home" size={size} color={color} />
-          ),
+            <Entypo name='home' size={size} color={color} />
+          )
         }}
       />
       <Tab.Screen
-        name="Stops"
+        name='Paradas'
         component={Stops}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="bicycle" size={size} color={color} />
-          ),
+            <FontAwesome name='bicycle' size={size} color={color} />
+          )
         }}
       />
       <Tab.Screen
-        name="Favorites"
+        name='Cercanas'
+        component={CloseStops}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name='md-compass' size={size} color={color} />
+          )
+        }}
+      />
+      <Tab.Screen
+        name='Favoritas'
         component={Favorites}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <AntDesign name="heart" size={size} color={color} />
-          ),
+            <AntDesign name='heart' size={size} color={color} />
+          )
         }}
       />
       <Tab.Screen
-        name="Settings"
+        name='Opciones'
         component={Settings}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="settings" size={size} color={color} />
-          ),
+            <Ionicons name='settings' size={size} color={color} />
+          )
         }}
       />
     </Tab.Navigator>
-  );
-};
+  )
+}
 
-export default LoggedInTab;
+export default LoggedInTab

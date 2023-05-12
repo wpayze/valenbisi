@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native'
 import { useIsFocused } from '@react-navigation/native'
 
-import FavoriteService from '../../services/FavoriteService'
 import StopItem from '../../shared/StopItem'
 import CustomModal from '../../shared/CustomModal'
 import ShowStopContent from '../../shared/ShowStopContent'
+import CloseStopsService from '../../services/CloseStopsService'
+import { AppContext } from '../../context/AppContext'
 
-const Favorites = () => {
-  const [favorites, setFavorites] = useState([])
+const CloseStops = () => {
   const focus = useIsFocused()
-
   const [modalVisible, setModalVisible] = useState(false)
-  const [selectedItem, setSelectedItem] = useState(false)
+  const [selectedItem, setSelectedItem] = useState(null)
+  const [stops, setStops] = useState([])
+  const { state, getLocation } = useContext(AppContext)
 
   const handleOpenModal = item => {
     setModalVisible(true)
@@ -24,23 +25,33 @@ const Favorites = () => {
   }
 
   useEffect(() => {
-    const fetchFavorites = async () => {
-      const favorites = await FavoriteService.fetchFavorites()
-      setFavorites(favorites?.records)
+    const fetchStops = async () => {
+      try {
+        const data = await CloseStopsService.getNearStopsList(state.location)
+        setStops(data?.records)
+      } catch (error) {
+        console.error(error)
+      }
     }
-
-    if (focus) fetchFavorites()
+    if (focus && state.location) {
+      fetchStops()
+    }
   }, [focus])
+
+  useEffect(() => {
+    getLocation()
+  }, [])
 
   return (
     <View style={styles.container}>
       <ScrollView>
-        {favorites?.map((item, index) => (
+        {stops.map((item, index) => (
           <StopItem
             key={index}
             item={item}
             index={index}
             showHeart={false}
+            showDistance
             toggleModal={handleOpenModal}
           />
         ))}
@@ -60,4 +71,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Favorites
+export default CloseStops

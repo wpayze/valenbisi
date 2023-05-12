@@ -1,5 +1,5 @@
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 const StopItem = ({
   index,
@@ -8,7 +8,13 @@ const StopItem = ({
   showHeart = true,
   favTogg,
   toggleModal,
+  showDistance = false
 }) => {
+  const convertMetersToKilometers = meters => {
+    const kilometers = meters / 1000
+    return kilometers.toFixed(2) // Redondea a 2 decimales
+  }
+
   return (
     <View key={index} style={styles.stop}>
       <TouchableOpacity
@@ -16,6 +22,16 @@ const StopItem = ({
         onPress={() => toggleModal(item)}
       >
         <Text style={styles.stopTitle}>{item.fields.address}</Text>
+        {showDistance && (
+          <Text style={styles.distanceTitle}>
+            A{' '}
+            <Text style={styles.distanceValue}>
+              {convertMetersToKilometers(item.distanceFromUser)} km
+            </Text>{' '}
+            de distancia
+          </Text>
+        )}
+
         <Text style={styles.availableText}>
           Bicis disponibles: {item.fields.available}
         </Text>
@@ -27,43 +43,49 @@ const StopItem = ({
           onPress={() => favTogg(item.fields.gid)}
         >
           <Icon
-            name={favorites?.includes(item.fields.gid) ? "heart" : "heart-o"}
+            name={favorites?.includes(item.fields.gid) ? 'heart' : 'heart-o'}
             style={styles.icon}
           />
         </TouchableOpacity>
       )}
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   stop: {
     paddingVertical: 10,
     borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+    borderBottomColor: '#ccc',
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   stopText: {
-    width: "80%"
+    width: '80%'
   },
   stopTitle: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 'bold'
+  },
+  distanceTitle: {
+    fontSize: 16
+  },
+  distanceValue: {
+    fontWeight: 'bold'
   },
   availableText: {
     fontSize: 16,
-    color: "#777",
+    color: '#777'
   },
   icon: {
     fontSize: 24,
-    color: "red",
+    color: 'red'
   },
   heart: {
-    paddingRight: 20,
-  },
-});
+    paddingRight: 20
+  }
+})
 
-export default StopItem;
+export default StopItem

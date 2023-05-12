@@ -1,38 +1,38 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from 'react'
 import {
   Text,
   View,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
-} from "react-native";
-import AuthService from "../../services/AuthService";
-import { AppContext } from "../../context/AppContext";
+  StyleSheet
+} from 'react-native'
+import AuthService from '../../services/AuthService'
+import { AppContext } from '../../context/AppContext'
 
 const Login = () => {
   useEffect(() => {
     const checkLoggedIn = async () => {
-      const isLoggedIn = await AuthService.isLoggedIn();
+      const isLoggedIn = await AuthService.isLoggedIn()
 
-      if (isLoggedIn) setState((prev) => ({ ...prev, isLoggedIn: true }));
-    };
-    checkLoggedIn();
-  }, []);
+      if (isLoggedIn) setState(prev => ({ ...prev, isLoggedIn: true }))
+    }
+    checkLoggedIn()
+  }, [])
 
-  const { setState } = useContext(AppContext);
+  const { setState } = useContext(AppContext)
 
   const handleLogin = async () => {
-    const logged = await AuthService.login(username, password);
+    const logged = await AuthService.login(username, password)
     if (!logged) {
-      setLoginError(true);
-      return;
+      setLoginError(true)
+      return
     }
-    setState((prev) => ({ ...prev, isLoggedIn: true }));
-  };
+    setState(prev => ({ ...prev, isLoggedIn: true }))
+  }
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [loginError, setLoginError] = useState(false);
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [loginError, setLoginError] = useState(false)
 
   return (
     <View style={styles.section}>
@@ -47,7 +47,7 @@ const Login = () => {
         <TextInput
           style={styles.inputs}
           value={username}
-          onChangeText={(text) => setUsername(text)}
+          onChangeText={text => setUsername(text)}
         />
       </View>
 
@@ -56,8 +56,8 @@ const Login = () => {
         <TextInput
           style={styles.inputs}
           value={password}
-          onChangeText={(text) => setPassword(text)}
-          secureTextEntry={true}
+          onChangeText={text => setPassword(text)}
+          secureTextEntry
         />
       </View>
 
@@ -65,8 +65,8 @@ const Login = () => {
         <Text style={styles.text}>Iniciar Sesi&oacute;n</Text>
       </TouchableOpacity>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   section: {
@@ -74,37 +74,37 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#fff",
-    padding: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    padding: 20
   },
   errorText: {
-    color: "red",
-    marginBottom: 10,
+    color: 'red',
+    marginBottom: 10
   },
   formGroup: {
-    marginBottom: 20,
+    marginBottom: 20
   },
   label: {
-    marginBottom: 5,
+    marginBottom: 5
   },
   inputs: {
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: '#ccc',
     borderRadius: 5,
     padding: 10,
-    marginBottom: 10,
+    marginBottom: 10
   },
   button: {
-    backgroundColor: "#3498db",
+    backgroundColor: '#3498db',
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 5
   },
   text: {
-    color: "#fff",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-});
-export default Login;
+    color: '#fff',
+    fontWeight: 'bold',
+    textAlign: 'center'
+  }
+})
+export default Login
