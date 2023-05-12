@@ -18,7 +18,7 @@ const Stops = () => {
   const [modalVisible, setModalVisible] = useState(false)
   const [selectedItem, setSelectedItem] = useState(false)
 
-  const handleOpenModal = item => {
+  const handleOpenModal = (item) => {
     setModalVisible(true)
     setSelectedItem(item)
   }
@@ -39,7 +39,7 @@ const Stops = () => {
     }
   }, [focus])
 
-  const handleFavoriteToggle = async id => {
+  const handleFavoriteToggle = async (id) => {
     const favorites = await FavoriteService.toggleFavorite(id)
     setFavorites(favorites)
   }

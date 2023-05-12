@@ -17,7 +17,7 @@ const Landing = ({ navigation }) => {
     const checkLoggedIn = async () => {
       const isLoggedIn = await AuthService.isLoggedIn()
 
-      if (isLoggedIn) setState(prev => ({ ...prev, isLoggedIn: true }))
+      if (isLoggedIn) setState((prev) => ({ ...prev, isLoggedIn: true }))
     }
     checkLoggedIn()
   }, [])

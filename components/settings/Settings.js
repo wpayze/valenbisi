@@ -8,7 +8,7 @@ const Settings = () => {
 
   const handleLogout = async () => {
     await AuthService.logout()
-    setState(prev => ({ ...prev, isLoggedIn: false }))
+    setState((prev) => ({ ...prev, isLoggedIn: false }))
   }
 
   const user = AuthService.user

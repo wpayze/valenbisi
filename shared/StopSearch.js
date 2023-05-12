@@ -13,7 +13,7 @@ const StopSearch = () => {
   const { setState } = useContext(AppContext)
 
   const handleSearch = () => {
-    setState(prevState => ({ ...prevState, search: searchText }))
+    setState((prevState) => ({ ...prevState, search: searchText }))
   }
 
   return (

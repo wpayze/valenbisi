@@ -24,12 +24,10 @@ export const AppContextProvider = ({ children }) => {
     try {
       const proximity = `${latitude},${longitude},${state.nearStopsRange}`
       const response = await fetch(
-        `${apiUrl}&geofilter.distance=${proximity}&rows=${
-          state.records ? state.records : '300'
-        }`
+        `${apiUrl}&geofilter.distance=${proximity}&rows=${300}`
       )
       const data = await response.json()
-      setState(prevState => ({
+      setState((prevState) => ({
         ...prevState,
         stops: data
       }))
@@ -47,7 +45,7 @@ export const AppContextProvider = ({ children }) => {
         `${apiUrl}rows=${state.itemsPerPage}&sort=${sort}&start=${state.start}${search}`
       )
       const data = await response.json()
-      setState(prevState => ({
+      setState((prevState) => ({
         ...prevState,
         stops: data,
         records: data.nhits
@@ -64,7 +62,7 @@ export const AppContextProvider = ({ children }) => {
     }
 
     const location = await Location.getCurrentPositionAsync({})
-    setState(prevState => ({
+    setState((prevState) => ({
       ...prevState,
       location
     }))

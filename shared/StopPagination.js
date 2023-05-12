@@ -9,10 +9,10 @@ const StopPagination = () => {
 
   const totalPages = Math.ceil(state.records / itemsPerPage)
 
-  const handlePageChange = page => {
+  const handlePageChange = (page) => {
     setCurrentPage(page)
     const start = itemsPerPage * (page - 1)
-    setState(prevState => ({ ...prevState, start }))
+    setState((prevState) => ({ ...prevState, start }))
   }
 
   return (
@@ -21,26 +21,28 @@ const StopPagination = () => {
       showsHorizontalScrollIndicator={false}
       contentContainerStyle={styles.container}
     >
-      {Array.from({ length: totalPages }, (_, index) => index + 1).map(page => (
-        <TouchableOpacity
-          key={page}
-          onPress={() => handlePageChange(page)}
-          style={[
-            styles.pageButton,
-            page === currentPage && styles.activePageButton
-          ]}
-        >
-          <Text
-            style={
-              page === currentPage
-                ? styles.activePageButtonText
-                : styles.pageButtonText
-            }
+      {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+        (page) => (
+          <TouchableOpacity
+            key={page}
+            onPress={() => handlePageChange(page)}
+            style={[
+              styles.pageButton,
+              page === currentPage && styles.activePageButton
+            ]}
           >
-            {page}
-          </Text>
-        </TouchableOpacity>
-      ))}
+            <Text
+              style={
+                page === currentPage
+                  ? styles.activePageButtonText
+                  : styles.pageButtonText
+              }
+            >
+              {page}
+            </Text>
+          </TouchableOpacity>
+        )
+      )}
     </ScrollView>
   )
 }

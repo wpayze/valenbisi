@@ -14,7 +14,7 @@ const Login = () => {
     const checkLoggedIn = async () => {
       const isLoggedIn = await AuthService.isLoggedIn()
 
-      if (isLoggedIn) setState(prev => ({ ...prev, isLoggedIn: true }))
+      if (isLoggedIn) setState((prev) => ({ ...prev, isLoggedIn: true }))
     }
     checkLoggedIn()
   }, [])
@@ -27,7 +27,7 @@ const Login = () => {
       setLoginError(true)
       return
     }
-    setState(prev => ({ ...prev, isLoggedIn: true }))
+    setState((prev) => ({ ...prev, isLoggedIn: true }))
   }
 
   const [username, setUsername] = useState('')
@@ -47,7 +47,7 @@ const Login = () => {
         <TextInput
           style={styles.inputs}
           value={username}
-          onChangeText={text => setUsername(text)}
+          onChangeText={(text) => setUsername(text)}
         />
       </View>
 
@@ -56,7 +56,7 @@ const Login = () => {
         <TextInput
           style={styles.inputs}
           value={password}
-          onChangeText={text => setPassword(text)}
+          onChangeText={(text) => setPassword(text)}
           secureTextEntry
         />
       </View>

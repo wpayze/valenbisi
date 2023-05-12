@@ -8,6 +8,7 @@ import Stops from '../stops/Stops'
 import Settings from '../settings/Settings'
 
 import { Entypo, AntDesign, Ionicons, FontAwesome } from '@expo/vector-icons'
+import QRCodeReader from '../qr/QRCodeReader'
 
 const LoggedInTab = () => {
   const Tab = createBottomTabNavigator()
@@ -47,6 +48,15 @@ const LoggedInTab = () => {
         options={{
           tabBarIcon: ({ color, size }) => (
             <AntDesign name='heart' size={size} color={color} />
+          )
+        }}
+      />
+      <Tab.Screen
+        name='QR'
+        component={QRCodeReader}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name='qrcode' size={size} color={color} />
           )
         }}
       />

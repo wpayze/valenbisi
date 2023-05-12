@@ -6,8 +6,8 @@ const AuthService = {
     const defaultUser = { username: 'admin', password: 'admin' }
     let users = usersDB ? [...JSON.parse(usersDB), defaultUser] : [defaultUser]
 
-    const foundUser = users.find(u => u.username === username)
-    users = users.filter(u => u.username === defaultUser.username)
+    const foundUser = users.find((u) => u.username === username)
+    users = users.filter((u) => u.username === defaultUser.username)
 
     if (foundUser && foundUser.password !== password) {
       return false

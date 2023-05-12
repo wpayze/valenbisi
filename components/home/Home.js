@@ -42,7 +42,7 @@ const Home = () => {
     getStops()
   }, [])
 
-  const markers = state.stops?.records?.map(r => ({
+  const markers = state.stops?.records?.map((r) => ({
     lat: r.fields.geo_point_2d[0],
     lon: r.fields.geo_point_2d[1],
     address: r.fields.address,
@@ -54,7 +54,7 @@ const Home = () => {
     <View style={styles.container}>
       <MapView
         style={styles.map}
-        ref={ref => setMapRef(ref)}
+        ref={(ref) => setMapRef(ref)}
         initialRegion={{
           latitude: 39.4699,
           longitude: -0.3763,
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
   },
   repositionButton: {
     position: 'absolute',
-    bottom: 20,
+    top: 20,
     right: 20,
     backgroundColor: '#e6e6e6',
     borderWidth: 1,
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
   searchButton: {
     position: 'absolute',
     bottom: 20,
-    left: 20,
+    right: 20,
     backgroundColor: '#e6e6e6',
     borderWidth: 1,
     borderColor: '#999999',

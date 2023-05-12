@@ -16,15 +16,20 @@ const calculateDistance = (lat1, lon1, lat2, lon2) => {
   return distance // metros
 }
 
-const deg2rad = deg => {
+const deg2rad = (deg) => {
   return deg * (Math.PI / 180)
 }
 
 const CloseStopsService = {
-  getNearStopsList: async location => {
+  getNearStopsList: async (location) => {
     try {
+      // const response = await fetch(
+      //   'https://valencia.opendatasoft.com/api/records/1.0/search/?dataset=valenbisi-disponibilitat-valenbisi-dsiponibilidad&sort=-number&rows=' +
+      //     300
+      // )
+      const proximity = `${location.coords.latitude},${location.coords.longitude},5000`
       const response = await fetch(
-        'https://valencia.opendatasoft.com/api/records/1.0/search/?dataset=valenbisi-disponibilitat-valenbisi-dsiponibilidad&sort=-number&rows=30'
+        `https://valencia.opendatasoft.com/api/records/1.0/search/?dataset=valenbisi-disponibilitat-valenbisi-dsiponibilidad&geofilter.distance=${proximity}&rows=${300}`
       )
       const data = await response.json()
 

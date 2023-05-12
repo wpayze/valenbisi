@@ -11,7 +11,7 @@ const FavoriteService = {
 
       if (!favorites || favorites.length === 0) return []
 
-      const conditions = favorites.map(id => `gid=${id}`)
+      const conditions = favorites.map((id) => `gid=${id}`)
       const query = conditions.join(' OR ')
 
       const response = await fetch(
@@ -23,11 +23,11 @@ const FavoriteService = {
       console.error(error)
     }
   },
-  toggleFavorite: async id => {
+  toggleFavorite: async (id) => {
     let favorites = await FavoriteService.getLocalFavorites()
 
     if (favorites && favorites.includes(id)) {
-      favorites = favorites.filter(favorite => favorite !== id)
+      favorites = favorites.filter((favorite) => favorite !== id)
     } else {
       favorites = favorites ? [...favorites, id] : [id]
     }

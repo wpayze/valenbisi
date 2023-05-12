@@ -10,10 +10,10 @@ const FilterButton = ({ name, cmd, status, setFilters }) => {
     setIsAscending(!isAscending)
 
     const prefix = isAscending ? '' : '-'
-    setState(prevState => ({ ...prevState, command: prefix + cmd }))
+    setState((prevState) => ({ ...prevState, command: prefix + cmd }))
 
-    setFilters(prevFilters =>
-      prevFilters.map(filter => {
+    setFilters((prevFilters) =>
+      prevFilters.map((filter) => {
         if (filter.name !== name) {
           return {
             ...filter,

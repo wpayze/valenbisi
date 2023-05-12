@@ -7,14 +7,18 @@ import StopItem from '../../shared/StopItem'
 import CustomModal from '../../shared/CustomModal'
 import ShowStopContent from '../../shared/ShowStopContent'
 
+import loadingAnimation from '../../assets/spinner.json'
+import AnimatedLottieView from 'lottie-react-native'
+
 const Favorites = () => {
   const [favorites, setFavorites] = useState([])
   const focus = useIsFocused()
 
   const [modalVisible, setModalVisible] = useState(false)
   const [selectedItem, setSelectedItem] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
-  const handleOpenModal = item => {
+  const handleOpenModal = (item) => {
     setModalVisible(true)
     setSelectedItem(item)
   }
@@ -25,26 +29,46 @@ const Favorites = () => {
 
   useEffect(() => {
     const fetchFavorites = async () => {
+      setIsLoading(true)
       const favorites = await FavoriteService.fetchFavorites()
       setFavorites(favorites?.records)
+
+      const delay = new Promise((resolve) => setTimeout(resolve, 500))
+
+      await delay
+
+      setIsLoading(false)
     }
 
     if (focus) fetchFavorites()
   }, [focus])
 
+  const deleteFav = async (id) => {
+    await FavoriteService.toggleFavorite(id)
+    const favorites = await FavoriteService.fetchFavorites()
+    setFavorites(favorites?.records)
+  }
+
   return (
     <View style={styles.container}>
-      <ScrollView>
-        {favorites?.map((item, index) => (
-          <StopItem
-            key={index}
-            item={item}
-            index={index}
-            showHeart={false}
-            toggleModal={handleOpenModal}
-          />
-        ))}
-      </ScrollView>
+      {isLoading
+        ? (
+          <AnimatedLottieView source={loadingAnimation} autoPlay loop />
+          )
+        : (
+          <ScrollView>
+            {favorites?.map((item, index) => (
+              <StopItem
+                key={index}
+                item={item}
+                index={index}
+                showHeart={false}
+                deleteFav={deleteFav}
+                toggleModal={handleOpenModal}
+              />
+            ))}
+          </ScrollView>
+          )}
 
       <CustomModal visible={modalVisible} onClose={handleCloseModal}>
         <ShowStopContent item={selectedItem} />

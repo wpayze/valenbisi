@@ -7,12 +7,13 @@ const StopItem = ({
   favorites,
   showHeart = true,
   favTogg,
+  deleteFav,
   toggleModal,
   showDistance = false
 }) => {
-  const convertMetersToKilometers = meters => {
+  const convertMetersToKilometers = (meters) => {
     const kilometers = meters / 1000
-    return kilometers.toFixed(2) // Redondea a 2 decimales
+    return kilometers.toFixed(2)
   }
 
   return (
@@ -37,17 +38,26 @@ const StopItem = ({
         </Text>
         <Text style={styles.availableText}>Huecos: {item.fields.free}</Text>
       </TouchableOpacity>
-      {showHeart && (
-        <TouchableOpacity
-          style={styles.heart}
-          onPress={() => favTogg(item.fields.gid)}
-        >
-          <Icon
-            name={favorites?.includes(item.fields.gid) ? 'heart' : 'heart-o'}
-            style={styles.icon}
-          />
-        </TouchableOpacity>
-      )}
+      {showHeart
+        ? (
+          <TouchableOpacity
+            style={styles.heart}
+            onPress={() => favTogg(item.fields.gid)}
+          >
+            <Icon
+              name={favorites?.includes(item.fields.gid) ? 'heart' : 'heart-o'}
+              style={styles.icon}
+            />
+          </TouchableOpacity>
+          )
+        : (
+          <TouchableOpacity
+            style={styles.heart}
+            onPress={() => deleteFav(item.fields.gid)}
+          >
+            <Icon name='trash' style={styles.icon} />
+          </TouchableOpacity>
+          )}
     </View>
   )
 }
