@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {
   View,
   TextInput,
@@ -8,13 +8,18 @@ import {
 } from 'react-native'
 import { AppContext } from '../context/AppContext'
 
-const StopSearch = () => {
+const StopSearch = ({ fireReset }) => {
   const [searchText, setSearchText] = useState('')
   const { setState } = useContext(AppContext)
 
   const handleSearch = () => {
-    setState((prevState) => ({ ...prevState, search: searchText }))
+    setState((prevState) => ({ ...prevState, search: searchText, start: 0 }))
   }
+
+  useEffect(() => {
+    setSearchText('')
+    setState((prevState) => ({ ...prevState, search: '' }))
+  }, [fireReset])
 
   return (
     <View style={styles.container}>

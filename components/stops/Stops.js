@@ -17,6 +17,7 @@ const Stops = () => {
   const focus = useIsFocused()
   const [modalVisible, setModalVisible] = useState(false)
   const [selectedItem, setSelectedItem] = useState(false)
+  const [fireReset, setFireReset] = useState(false)
 
   const handleOpenModal = (item) => {
     setModalVisible(true)
@@ -46,8 +47,8 @@ const Stops = () => {
 
   return (
     <View style={styles.container}>
-      <StopSearch />
-      <StopFilters />
+      <StopSearch fireReset={fireReset} />
+      <StopFilters fireReset={fireReset} setFireReset={setFireReset} />
       <StopPagination />
       {stops?.length === 0 && <Text>NO SE ENCONTRARON PARADAS.</Text>}
       <ScrollView>
